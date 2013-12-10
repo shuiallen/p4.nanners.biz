@@ -3,6 +3,12 @@
 <head>
 	<title><?php if(isset($title)) echo $title; ?></title>
 
+	<!-- Common CSS/JS -->
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 					
 	<!-- Controller Specific JS/CSS -->
@@ -11,9 +17,47 @@
 </head>
 
 <body>	
+    <div class=outer-box>
+        <div class=logo-header>
+            What Am I Doing Today?
+        </div>
+        <div class=user-bar>
+        	<!-- Menu for users who are logged in -->
+			<?php if(is_object($user) && $user): ?>
+				<li><a href='/users/logout'>Logout</a></li>
+				<li><a href='/users/profile'>My Profile</a></li>
+			<!-- Menu options for users who are not logged in -->
+			<?php else: ?>
+				<li><a href='/users/signup'>Register</a></li>
+				<li><a href='/users/login'>Login</a></li>
+		    <?php endif; ?>
+        </div>
+        <div class=nav>
+ 			<li><a href='/'>Home</a></li>
 
-	<?php if(isset($content)) echo $content; ?>
+		<?php if(is_object($user) && $user): ?>
+			<!-- Additional options for users who are logged in -->
 
+				<li><a href='/lists'>What Am I Doing</a></li>
+				<li><a href='/lists/filter'>Search</a></li>
+				<li><a href='/projects'>Projects</a></li>
+	        </div>
+
+<!-- TODO: Need to figure out how $user was set and how to set an admin user -->
+<!-- 			<?php if(is_object($admin) && $admin): ?>
+				<!-- Add admin functions -->
+				<?php endif; ?> 
+-->
+		<?php endif; ?>
+
+        <div class=content>
+			<?php if(isset($content)) echo $content; ?>
+        </div>
+    </div>
+
+	<!-- Common CSS/JSS -->
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
+
+	    <div class="footer"> &copy; My P4 What Am I Doing? Web Application</div>
 </body>
 </html>

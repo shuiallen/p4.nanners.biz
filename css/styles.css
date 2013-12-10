@@ -1,0 +1,122 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing   : border-box;
+    box-sizing        : border-box;
+}
+body {
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    background-color: SteelBlue;
+}
+.outer-box {
+    display  : block;
+    border   : 1px solid black;
+    border-radius: 20px;
+
+}
+
+.logo-header {
+    height: 100px;
+    width: 100px;
+    border: 1px solid blue;
+    float: left;
+    position: relative;
+    margin: 15px 0px 10px 15px;
+}
+.nav {
+    color: White;
+    text-align: center;
+    display: block;
+    margin: 15px 15px 10px 15px;
+}
+.nav li {
+    display: inline;
+    list-style: none outside none;
+    margin: 0 0 0 25px;
+    color:White;
+}
+
+.user-bar {
+    color: White;
+    text-align: center;
+    display: block;
+    margin: 15px 15px 10px 15px;
+    text-align: right;
+}
+.user-bar li {
+    display: inline;
+    list-style: none outside none;
+    margin: 0 0 0 25px;
+}
+.content {
+    display: block;
+    border: 1px solid blue; 
+    margin: 40px 10px 20px 15px;
+    background-color: Grey;
+    border-radius: 20px;
+    box-shadow: 4px 4px 5px #888888;
+    text-align: left;
+}
+
+.content-section {
+	background: White;
+	text-align: left;
+	border-radius: 20px;
+	margin: 10px 5px 20px 20px;
+	-moz-box-shadow: 3px 3px 3px rgba(68,68,68,0.4);
+	-webkit-box-shadow: 3px 3px 3px rgba(68,68,68,0.4);
+	box-shadow: 3px 3px 3px rgba(68,68,68,0.4);
+    color: MediumOrchid;
+}
+
+.footer {
+	text-align: center;
+	vertical-align: top;
+	height: 35px;
+	margin-top: 10px;
+	color: #fff2dd;
+	position:relative;
+	z-index:1;
+}
+
+.clearfix: {
+  clear: both;
+}
+
+.formfields {
+  border: 5px solid #d0d2d5;
+  border-radius: 4px;
+  margin: auto;
+  padding: 30px;
+  max-width: 250px;
+  background: #6600FF;
+  color: White;
+}
+
+/*#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }*/
+
+.listItem {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 60%; 
+}
+.listItem li {
+    margin: 0 3px 3px 3px; 
+    padding: 0.4em; 
+    padding-left: 1.5em; 
+    font-size: 1.4em; 
+    height: 18px;
+}
+.listItem li span {
+    position: absolute;
+    margin-left: -1.3em;
+}
+
+.newtask {
+    border: 5px solid #d0d2d5;
+    border-radius: 4px;
+    margin: auto;
+    padding: 30px;
+    background: #6600FF;
+}
