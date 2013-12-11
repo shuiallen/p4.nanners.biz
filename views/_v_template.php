@@ -37,7 +37,8 @@
 
 		<?php if(is_object($user) && $user): ?>
 			<!-- Additional options for users who are logged in -->
-
+				<li><a href='/tasks'>Tasks</a></li>
+				<li><a href='/tasks/add'>List and Add Tasks</a></li>
 				<li><a href='/lists'>What Am I Doing</a></li>
 				<li><a href='/lists/filter'>Search</a></li>
 				<li><a href='/projects'>Projects</a></li>

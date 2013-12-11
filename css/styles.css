@@ -93,7 +93,12 @@ body {
   color: White;
 }
 
-/*#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }*/
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 38px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
+
+#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 240px; }
+/*.sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 240px; }*/
 
 .listItem {
     list-style-type: none;
@@ -119,4 +124,6 @@ body {
     margin: auto;
     padding: 30px;
     background: #6600FF;
+    width: 80%;
+    height: 180px;
 }
