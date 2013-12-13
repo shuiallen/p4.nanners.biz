@@ -113,28 +113,37 @@ class tasks_controller extends base_controller {
         $task_description = DB::instance(DB_NAME)->select_field($q);
 
         # Return the editing form with the existing task description
-        $view = View::instance('v_tasks_form');
+        // $view = View::instance('v_tasks_form');
  
         $data = Array();
         $data['task_id'] = $_POST['task_id'];
         $data['task_description'] = $task_description;
 
-        $view->data = $data;
-        echo $view;
+        // try sending back with json
+        echo json_encode($data);
+        // $view->data = $data;
+        // echo $view;
     }
 
     public function p_update() {
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
        
+        // This works in SQL
+       // $sql = "UPDATE `tasks` SET `task_id`=40,`task_description`=\'new value\'WHERE `task_id`=40";
         # Update the user's data
+        // This gets SQL error
         $count = DB::instance(DB_NAME)->update(
-            'users', $_POST, "WHERE task_id = ".$_POST['task_id']);
+            'users', $_POST, "WHERE `task_id` = ".$_POST['task_id']);
 
-        if ($count == 1)
+        // this doesn't make SQL complain, but it doesn't modify the record
+        // $count = DB::instance(DB_NAME)->update(
+            'users', $_POST, "WHERE task_id = ".$this->connection->real_escape_string($_POST['task_id']));
+
+        // if ($count == 1)
             echo $_POST['task_description'];
-        else
-            echo 'failed '.$count;
+        // else
+        //     echo 'failed '.$count;
 
     }
 }
