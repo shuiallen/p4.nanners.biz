@@ -3,14 +3,23 @@
 	<label for='task_id'>Task Id</label><br>
 	<input type="text" name='task_id' id='task_id'>
     <input type='Submit' id='find-task' value='Find'>
-    <!-- Hardcoded form -->
-<!--     <br>
-    <textarea name='task_description' id='task_description' rows="2" cols="80" wrap=hard autofocus required>
-    </textarea>
-    <input type='Submit' id='update-task' value='Update'>
-    <input type='Submit' id='cancel-edit' value='Cancel'>   -->
 </form>
 <div class='edittask' id='edit-div'>
+
+</div>
+<hr>
+<p> Create a time entry</p>
+<form>
+	<label for='time_task_id'>Task Id</label><br>
+	<input type="text" name='task_id' id='time_task_id'><br>
+	<label for='work_date'>Date worked</label>
+	<input type="datetime" name="work_date"><br>
+	<label for='hours_worked'>Hours</label>
+	<input type="number" name="hours" min="0" value=0><br>
+	<label for='hours_worked'>Minutes</label>
+	<input type="number" name="hours" value=0 min="0" max="50" step=10>
+</form>
+<div class="newtask" id='new-div'>
 
 </div>
 

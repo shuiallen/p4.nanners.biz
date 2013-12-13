@@ -1,7 +1,9 @@
 <form>
 
 <?php if ($data['task_id'] != 0): ?>
+	<label for='task<?=$data['task_id']?>'>Task Id</label><br>
     <input type='text' name='task_id' id='task<?=$data['task_id']?>' value=<?=$data['task_id']?> readonly>
+    <br>
 <?php endif; ?>
 
 <?php if ($data['task_id'] != 0): ?>
@@ -13,6 +15,12 @@
     </textarea>
 
 <?php if ($data['task_id'] != 0): ?>
+	<br>
+	<select name="status">
+		<option value="open">Open</option>
+		<option value="close">Close</option>
+	</select>
+	<br>
     <input type='Submit' id='update-task' value='Update'>
 	<input type='Submit' id='cancel-update' value='Cancel'> 
 <?php else: ?>

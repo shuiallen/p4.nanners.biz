@@ -7,13 +7,6 @@ $('#find-task').click(function() {
         	console.log('response from find task should be a view fragment') ;
             console.log(response);
 
-   //          var data = $.parseJSON(response);
-			// console.log( data['task_id']);
-			// console.log( data['task_description']);
-   //          $('#task_id').attr("val", data['task_id']);
-			// $('#task_description').html(data['task_description']);
-
-           // was the working code
            $('#edit-div').html(response);
            // display it now
            $( "#edit-div" ).show();
@@ -33,7 +26,6 @@ $('#edit-div').on("click", '#cancel-update', function() {
 });
 
 $('#edit-div').on("click", '#update-task', function() {
-// $('#update-task').click(function() {
     console.log('clicked update button');
 
 	var options = {
@@ -41,7 +33,10 @@ $('#edit-div').on("click", '#update-task', function() {
         url: '/tasks/p_update',
         success: function(response) { 
             console.log('in update success!');
- 
+	        // Clear the form
+		    $('.edittask').html("");
+			// Hide the element containing the form
+		    $('.edittask').hide();
         },
         error: function() {
             console.log('failed message');
@@ -49,7 +44,23 @@ $('#edit-div').on("click", '#update-task', function() {
 	}
 	$('form').ajaxForm(options);
 });
+
 // Code from here down doesn't work yet
+/*-------------------------------------------------------------------------------------------------
+Select the Date
+-------------------------------------------------------------------------------------------------*/
+$("#datepicker").datepicker(
+{
+    onSelect: function()
+    { 
+        var datexxx = $(this).datepicker('getDate'); 
+        dateObject = $.datepicker.formatDate( "yy-mm-dd", datexxx );
+    }
+});
+
+
+
+
 // The #update-task element is created on demand
 // So we have to use a delegated event to attach the event handler to its parent div element which has class .newtask
 // $('.edittask').on("click", '#update-task', function() {

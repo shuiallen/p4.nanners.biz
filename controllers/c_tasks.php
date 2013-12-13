@@ -23,7 +23,7 @@ class tasks_controller extends base_controller {
             INNER JOIN users
               ON tasks.user_id = users.user_id
             WHERE tasks.user_id = ".$this->user->user_id."
-            AND tasks.done = false
+            AND tasks.status = 0
               ORDER BY tasks.created DESC";
 
         # Store the result array in the variable $tasks
@@ -132,6 +132,11 @@ class tasks_controller extends base_controller {
         $data = Array();
         $data['task_description'] = $_POST['task_description'];
         $data['task_id'] = $_POST['task_id'];
+
+        if ($_POST['status'] == 'open')
+            $_POST['status'] = 0;
+        else
+            $_POST['status'] = 1;
 
         # Update the user's data
          $count = DB::instance(DB_NAME)->update(
