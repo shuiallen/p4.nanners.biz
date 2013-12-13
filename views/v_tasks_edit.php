@@ -12,7 +12,7 @@
 <div  id='edit-div'>
 
 </div>
-<!-- 
+
 <hr>
 <p> Create a new task</p>
 <form>
@@ -20,4 +20,4 @@
 </form>
 <div class="newtask" id='new-div'>
 
-</div> -->
+</div>

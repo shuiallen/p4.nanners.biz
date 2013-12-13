@@ -128,22 +128,17 @@ class tasks_controller extends base_controller {
     public function p_update() {
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
-       
-        // This works in SQL
-       // $sql = "UPDATE `tasks` SET `task_id`=40,`task_description`=\'new value\'WHERE `task_id`=40";
+        $data = Array();
+        $data['task_description'] = $_POST['task_description'];
+
         # Update the user's data
-        // This gets SQL error
-        $count = DB::instance(DB_NAME)->update(
-            'users', $_POST, "WHERE `task_id` = ".$_POST['task_id']);
+         $count = DB::instance(DB_NAME)->update(
+             'tasks', $data, "WHERE task_id = ".$_POST['task_id']);
 
-        // this doesn't make SQL complain, but it doesn't modify the record
-        // $count = DB::instance(DB_NAME)->update(
-            'users', $_POST, "WHERE task_id = ".$this->connection->real_escape_string($_POST['task_id']));
-
-        // if ($count == 1)
+        if ($count == 1)
             echo $_POST['task_description'];
-        // else
-        //     echo 'failed '.$count;
+        else
+            echo 'failed '.$count;
 
     }
 }
