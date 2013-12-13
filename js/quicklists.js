@@ -10,6 +10,5 @@ $('#insert-item').click(function() {
 });
 
 $('#save-list').click(function() {
-    $('#list-title').html($('#list-name').val());
-    $('#save-list-form').resetForm();
+ 
 });

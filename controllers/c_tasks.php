@@ -11,38 +11,9 @@ class tasks_controller extends base_controller {
 
         # JS for sortable 
         $client_files_body = Array(
-                        '/js/tasks_index.js'
-                        );
-        $this->template->client_files_body = Utils::load_client_files($client_files_body);   
-
-        # Query for my tasks that are not done
-        $q = "SELECT tasks.task_description, tasks.created
-            FROM tasks
-            INNER JOIN users
-              ON tasks.user_id = users.user_id
-            WHERE tasks.user_id = ".$this->user->user_id."
-            AND tasks.done = false
-              ORDER BY tasks.created DESC";
-
-        # Store the result array in the variable $tasks
-        $tasks = DB::instance(DB_NAME)->select_rows($q);
-
-        # Pass tasks back to the view
-        $this->template->content->tasks = $tasks;
-
-        # Render template
-        echo $this->template;
-    }
-
-    public function add() {
-        # Setup view
-        $this->template->content = View::instance('v_tasks_add');
-        $this->template->title   = "Tasks";
-
-        # JS for sortable 
-        $client_files_body = Array(
                         '/js/jquery.form.js',
-                        '/js/tasks_index.js'
+                        '/js/tasks_index.js',
+                        '/js/tasks_create.js'
                         );
         $this->template->client_files_body = Utils::load_client_files($client_files_body);   
 
@@ -58,6 +29,11 @@ class tasks_controller extends base_controller {
         # Store the result array in the variable $tasks
         $tasks = DB::instance(DB_NAME)->select_rows($q);
 
+        foreach($tasks as $key => $task) {
+            $tasks[$key]['view'] = View::instance('v_tasks_row');
+            $tasks[$key]['view']->data = $task;
+        }
+
         # Pass tasks back to the view
         $this->template->content->tasks = $tasks;
 
@@ -65,7 +41,18 @@ class tasks_controller extends base_controller {
         echo $this->template;
     }
 
-    public function p_add() {
+    public function p_newform() {
+        $view = View::instance('v_tasks_form');
+ 
+        $data = Array();
+        # There is no task_id for a new task yet
+        $data['task_id'] = 0;
+        $data['task_description'] = "";
+        $view->data = $data;
+        echo $view;
+    }
+
+    public function p_create() {
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
@@ -84,20 +71,70 @@ class tasks_controller extends base_controller {
         $data['task_id'] = $task_id;
         $data['task_description'] = $_POST['task_description'];
 
-        # Send back json results to the JS, formatted in json
-        echo json_encode($data);
+        $view = View::instance('v_tasks_row');
+        $view->data = $data;
+
+        echo $view;
 
         # Do we need to retrieve the data we just stored?
         #$task_details = DB::instance(DB_NAME)->select_row('SELECT * FROM tasks WHERE task_id = '.$task_id);
+    }
 
-        // # Set up the view
-        // $view = View::instance('v_tasks_p_add');
+    # This is the page that allows you to edit individual tasks
+    # I was trying to edit tasks from the Task List page but that wasn't working
+    # I think the way I am inserting the rows and declaring the event handlers is not correct
+    # So for now, you have to get one task at a time in order to change it after creating it
+    public function edit() {
+        # Setup view
+        $this->template->content = View::instance('v_tasks_edit');
+        $this->template->title   = "Modify Tasks";
 
-        // # Pass data to the view
-        // $view->task_description     = $_POST['task_description'];
-        // $view->task_id = $task_id;
+        # JS for sortable 
+        $client_files_body = Array(
+                        '/js/jquery.form.js',
+                        '/js/tasks_edit.js',
+                        '/js/tasks_create.js'
+                        );
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
-        // # Render the view
-        // echo $view;     
+        # Render template
+        echo $this->template;
+    }
+
+    public function p_findById() {
+        # Prevent SQL injection attacks by sanitizing the data the user entered in the form
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+        # Get the task description of this task by task id
+        $q = "SELECT task_description
+                FROM `tasks`
+               WHERE `task_id` = ".$_POST['task_id'];
+ 
+        $task_description = DB::instance(DB_NAME)->select_field($q);
+
+        # Return the editing form with the existing task description
+        $view = View::instance('v_tasks_form');
+ 
+        $data = Array();
+        $data['task_id'] = $_POST['task_id'];
+        $data['task_description'] = $task_description;
+
+        $view->data = $data;
+        echo $view;
+    }
+
+    public function p_update() {
+        # Prevent SQL injection attacks by sanitizing the data the user entered in the form
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
+       
+        # Update the user's data
+        $count = DB::instance(DB_NAME)->update(
+            'users', $_POST, "WHERE task_id = ".$_POST['task_id']);
+
+        if ($count == 1)
+            echo $_POST['task_description'];
+        else
+            echo 'failed '.$count;
+
     }
 }

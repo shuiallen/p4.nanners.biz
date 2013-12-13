@@ -94,7 +94,7 @@ body {
 }
 
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 38px; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 80px; }
 #sortable li span { position: absolute; margin-left: -1.3em; }
 
 #sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 240px; }
@@ -118,7 +118,7 @@ body {
     margin-left: -1.3em;
 }
 
-.newtask {
+.newtask, .edittask{
     border: 5px solid #d0d2d5;
     border-radius: 4px;
     margin: auto;
@@ -126,4 +126,8 @@ body {
     background: #6600FF;
     width: 80%;
     height: 180px;
+    display:none;
+}
+.edit_form {
+    display:none;
 }

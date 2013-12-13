@@ -37,18 +37,13 @@
 
 		<?php if(is_object($user) && $user): ?>
 			<!-- Additional options for users who are logged in -->
-				<li><a href='/tasks'>Tasks</a></li>
-				<li><a href='/tasks/add'>List and Add Tasks</a></li>
-				<li><a href='/lists'>What Am I Doing</a></li>
-				<li><a href='/lists/filter'>Search</a></li>
-				<li><a href='/projects'>Projects</a></li>
-	        </div>
+			<li><a href='/tasks'>Tasks</a></li>
+			<li><a href='/tasks/edit'>Edit Tasks</a></li>
+			<li><a href='/lists/quicklists'>QuickList</a></li>
+			<li><a href='/lists'>Build a List</a></li>
+			<li><a href='/projects'>Projects</a></li>
+        </div>
 
-<!-- TODO: Need to figure out how $user was set and how to set an admin user -->
-<!-- 			<?php if(is_object($admin) && $admin): ?>
-				<!-- Add admin functions -->
-				<?php endif; ?> 
--->
 		<?php endif; ?>
 
         <div class=content>
@@ -59,6 +54,6 @@
 	<!-- Common CSS/JSS -->
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
 
-	    <div class="footer"> &copy; My P4 What Am I Doing? Web Application</div>
+    <div class="footer"> &copy; My P4 What Am I Doing Today? Web Application</div>
 </body>
 </html>
