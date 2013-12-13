@@ -4,27 +4,27 @@ $('#find-task').click(function() {
         type: 'POST',
         url: '/tasks/p_findById',
         success: function(response) {
-        	console.log('response from find task') ;
+        	console.log('response from find task should be a view fragment') ;
             console.log(response);
 
-            var data = $.parseJSON(response);
-			console.log( data['task_id']);
-			console.log( data['task_description']);
-            $('#task_id').attr("val", data['task_id']);
-			$('#task_description').html(data['task_description']);
+   //          var data = $.parseJSON(response);
+			// console.log( data['task_id']);
+			// console.log( data['task_description']);
+   //          $('#task_id').attr("val", data['task_id']);
+			// $('#task_description').html(data['task_description']);
 
-            // was the working code
-           // $('.edittask').html(response);
-           // // display it now
-           // $( ".edittask" ).show();
+           // was the working code
+           $('#edit-div').html(response);
+           // display it now
+           $( "#edit-div" ).show();
         },  
     }
-    $('form').ajaxForm(options);
+    $('#edit-task-form').ajaxForm(options);
 
 
 });
 
-$('.edittask').on("click", '#cancel-edit', function() {
+$('#edit-div').on("click", '#cancel-update', function() {
 	console.log('clicked cancel on edit');
     // Clear the form
     $('.edittask').html("");
@@ -32,8 +32,8 @@ $('.edittask').on("click", '#cancel-edit', function() {
     $('.edittask').hide();
 });
 
-
-$('#update-task').click(function() {
+$('#edit-div').on("click", '#update-task', function() {
+// $('#update-task').click(function() {
     console.log('clicked update button');
 
 	var options = {

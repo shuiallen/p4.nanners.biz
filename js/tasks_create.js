@@ -30,7 +30,7 @@ $('.newtask').on("click", '#create-task', function() {
            $('#sortable').prepend(response);
         },
         data: {
-            task_description : $('#task_description').val()
+            task_description : $('#new_task_description').val()
         }     
     });
 
@@ -39,7 +39,7 @@ $('.newtask').on("click", '#create-task', function() {
     $('.newtask').html("");
 });
 
-$('.newtask').on("click", '#cancel-edit', function() {
+$('.newtask').on("click", '#cancel-create', function() {
     $('.newtask').html("");
     $( ".newtask" ).hide();
 });

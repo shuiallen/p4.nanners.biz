@@ -1,15 +1,16 @@
 <p> Edit an existing task </p>
-<form>
+<form id='edit-task-form'>
 	<label for='task_id'>Task Id</label><br>
 	<input type="text" name='task_id' id='task_id'>
     <input type='Submit' id='find-task' value='Find'>
-    <br>
+    <!-- Hardcoded form -->
+<!--     <br>
     <textarea name='task_description' id='task_description' rows="2" cols="80" wrap=hard autofocus required>
     </textarea>
     <input type='Submit' id='update-task' value='Update'>
-    <input type='Submit' id='cancel-edit' value='Cancel'>  
+    <input type='Submit' id='cancel-edit' value='Cancel'>   -->
 </form>
-<div  id='edit-div'>
+<div class='edittask' id='edit-div'>
 
 </div>
 

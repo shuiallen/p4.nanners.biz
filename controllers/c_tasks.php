@@ -106,23 +106,24 @@ class tasks_controller extends base_controller {
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
         # Get the task description of this task by task id
-        $q = "SELECT task_description
+        $q = "SELECT tasks.task_description, tasks.task_id
                 FROM `tasks`
                WHERE `task_id` = ".$_POST['task_id'];
  
-        $task_description = DB::instance(DB_NAME)->select_field($q);
+        $task_data = DB::instance(DB_NAME)->select_row($q);
 
         # Return the editing form with the existing task description
-        // $view = View::instance('v_tasks_form');
- 
-        $data = Array();
-        $data['task_id'] = $_POST['task_id'];
-        $data['task_description'] = $task_description;
+        $view = View::instance('v_tasks_form');
+        $view->data = $task_data;
+        echo $view;
 
         // try sending back with json
-        echo json_encode($data);
-        // $view->data = $data;
-        // echo $view;
+        // $data = Array();
+        // $data['task_id'] = $_POST['task_id'];
+        // $data['task_description'] = $task_description;
+
+        // echo json_encode($data);
+
     }
 
     public function p_update() {
@@ -130,10 +131,11 @@ class tasks_controller extends base_controller {
         $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
         $data = Array();
         $data['task_description'] = $_POST['task_description'];
+        $data['task_id'] = $_POST['task_id'];
 
         # Update the user's data
          $count = DB::instance(DB_NAME)->update(
-             'tasks', $data, "WHERE task_id = ".$_POST['task_id']);
+             'tasks', $_POST, "WHERE task_id = ".$_POST['task_id']);
 
         if ($count == 1)
             echo $_POST['task_description'];
