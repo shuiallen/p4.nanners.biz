@@ -5,8 +5,9 @@ $('#find-task').click(function() {
         url: '/tasks/p_findById',
         success: function(response) {
         	console.log('response from find task should be a view fragment') ;
+            console.log('+');
             console.log(response);
-
+            console.log('+');
            $('#edit-div').html(response);
            // display it now
            $( "#edit-div" ).show();
@@ -45,22 +46,9 @@ $('#edit-div').on("click", '#update-task', function() {
 	$('form').ajaxForm(options);
 });
 
+
+
 // Code from here down doesn't work yet
-/*-------------------------------------------------------------------------------------------------
-Select the Date
--------------------------------------------------------------------------------------------------*/
-$("#datepicker").datepicker(
-{
-    onSelect: function()
-    { 
-        var datexxx = $(this).datepicker('getDate'); 
-        dateObject = $.datepicker.formatDate( "yy-mm-dd", datexxx );
-    }
-});
-
-
-
-
 // The #update-task element is created on demand
 // So we have to use a delegated event to attach the event handler to its parent div element which has class .newtask
 // $('.edittask').on("click", '#update-task', function() {

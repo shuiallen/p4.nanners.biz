@@ -23,17 +23,4 @@ class lists_controller extends base_controller {
 
     }
 
-    public function quicklists() {
-        # Setup view
-        $this->template->content = View::instance('v_lists_quicklists');
-        $this->template->title   = "Create a quick list";
-
-        # Add JS to page
-        $client_files_body = ['/js/jquery.form.js','/js/quicklists.js'];
-        $this->template->client_files_body = Utils::load_client_files($client_files_body);   
-
-        # Render template
-        echo $this->template;
-
-    }
 }

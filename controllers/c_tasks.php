@@ -30,6 +30,8 @@ class tasks_controller extends base_controller {
         $tasks = DB::instance(DB_NAME)->select_rows($q);
 
         foreach($tasks as $key => $task) {
+            // XSS prevention 
+            $task['task_description'] = ProjectUtils::clean($task['task_description']);
             $tasks[$key]['view'] = View::instance('v_tasks_row');
             $tasks[$key]['view']->data = $task;
         }
@@ -37,11 +39,18 @@ class tasks_controller extends base_controller {
         # Pass tasks back to the view
         $this->template->content->tasks = $tasks;
 
+        # Generate a new CSRF session token, and pass it to the View
+        $this->template->content->token = NoCSRF::generate('token');
+
         # Render template
         echo $this->template;
     }
 
     public function p_newform() {
+        ProjectUtils::check_token($_POST, "update profile");
+        # If it doesn't fail, we can remove the token
+        unset($_POST['token']);
+         
         $view = View::instance('v_tasks_form');
  
         $data = Array();
@@ -49,6 +58,7 @@ class tasks_controller extends base_controller {
         $data['task_id'] = 0;
         $data['task_description'] = "";
         $view->data = $data;
+
         echo $view;
     }
 
@@ -62,7 +72,7 @@ class tasks_controller extends base_controller {
         # More data we want stored with the user
         $_POST['created']  = Time::now();
         $_POST['modified'] = Time::now();
-        $_POST['done'] = false;  // New task is not done
+        $_POST['status'] = false;  // New task is not done
                 
         # Insert this task into the tasks table
         $task_id = DB::instance(DB_NAME)->insert('tasks', $_POST);
@@ -75,9 +85,6 @@ class tasks_controller extends base_controller {
         $view->data = $data;
 
         echo $view;
-
-        # Do we need to retrieve the data we just stored?
-        #$task_details = DB::instance(DB_NAME)->select_row('SELECT * FROM tasks WHERE task_id = '.$task_id);
     }
 
     # This is the page that allows you to edit individual tasks
@@ -93,7 +100,8 @@ class tasks_controller extends base_controller {
         $client_files_body = Array(
                         '/js/jquery.form.js',
                         '/js/tasks_edit.js',
-                        '/js/tasks_create.js'
+                        '/js/tasks_create.js',
+                        '/js/time_entry.js'
                         );
         $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
@@ -111,27 +119,19 @@ class tasks_controller extends base_controller {
                WHERE `task_id` = ".$_POST['task_id'];
  
         $task_data = DB::instance(DB_NAME)->select_row($q);
-
-        # Return the editing form with the existing task description
-        $view = View::instance('v_tasks_form');
-        $view->data = $task_data;
-        echo $view;
-
-        // try sending back with json
-        // $data = Array();
-        // $data['task_id'] = $_POST['task_id'];
-        // $data['task_description'] = $task_description;
-
-        // echo json_encode($data);
-
+        if ($task_data == null) {
+            echo 'Unknown task id - try again';
+        } else {
+            # Return the editing form with the existing task description
+            $view = View::instance('v_tasks_form');
+            $view->data = $task_data;
+            echo $view;
+        }
     }
 
     public function p_update() {
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
-        $data = Array();
-        $data['task_description'] = $_POST['task_description'];
-        $data['task_id'] = $_POST['task_id'];
 
         if ($_POST['status'] == 'open')
             $_POST['status'] = 0;

@@ -1,4 +1,5 @@
 <?php
+
 class users_controller extends base_controller {
 
     public function __construct() {
@@ -19,15 +20,29 @@ class users_controller extends base_controller {
         # Pass data to the view
         $this->template->content->error = $error;
 
+        # Generate a new CSRF session token, and pass it to the View
+        $this->template->content->token = NoCSRF::generate('token');
+
         # Render template
         echo $this->template;
 
     }
 
     public function p_signup() {
+        ProjectUtils::check_token($_POST, "update signup");
+        # If it doesn't fail, we can remove the token
+        unset($_POST['token']);
 
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+        # Sign up data fields should not have any funny business in them, so cleaning them on input
+ 
+        $_POST['email'] = ProjectUtils::clean($_POST['email']);
+        $_POST['first_name'] = ProjectUtils::clean($_POST['first_name']);
+        $_POST['last_name'] = ProjectUtils::clean($_POST['last_name']);
+        $_POST['nickname'] = ProjectUtils::clean($_POST['nickname']);
+        # Password will never be displayed and should be exactly what the user input
 
         # The input form sets required, so this might be overkill in this simple project
         # But this allows signup to be used programmatically
@@ -128,12 +143,18 @@ class users_controller extends base_controller {
         # Pass data to the view
         $this->template->content->error = $error;
 
+        # Generate a new CSRF session token, and pass it to the View
+        $this->template->content->token = NoCSRF::generate('token');
+        
         # Render template
         echo $this->template;
     }
 
     public function p_login() {
-        
+       ProjectUtils::check_token($_POST, "update profile");
+        # If it doesn't fail, we can remove the token
+        unset($_POST['token']);
+
         # Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
@@ -215,6 +236,9 @@ class users_controller extends base_controller {
         $this->template->content->avatar->error = $error;
         $this->template->content->error = $error;
 
+        # Generate a new CSRF session token, and pass it to the View
+        $this->template->content->token = NoCSRF::generate('token');
+
         # Render template
         echo $this->template;
 
@@ -222,17 +246,24 @@ class users_controller extends base_controller {
 
     public function p_update () {
 
+        ProjectUtils::check_token($_POST, "update profile");
+        # If it doesn't fail, we can remove the token
+        unset($_POST['token']);
+
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
+        // compare POST fields with user fields
+        // only check and clean fields that were modified
+        // only send updated fields to DB
         if (!users_controller::uniqueEmail($_POST['email'])) {
+            // Todo: this is breaking the update operation, fix this
             Router::redirect("/users/profile/duplicate");
         }
 
         if (!users_controller::validEmail($_POST['email'])) {
            Router::redirect("/users/profile/invalidemail");
         }
-
 
          # Update the user's data
         DB::instance(DB_NAME)->update(

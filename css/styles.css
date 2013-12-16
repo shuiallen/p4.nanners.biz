@@ -118,7 +118,7 @@ body {
     margin-left: -1.3em;
 }
 
-.newtask, .edittask{
+.newtask, .edittask, .search{
     border: 5px solid #d0d2d5;
     border-radius: 4px;
     margin: auto;
@@ -130,4 +130,32 @@ body {
 }
 .edit_form {
     display:none;
+}
+
+
+/* For stopwatch applet */
+/*input {
+    padding:4px;}
+
+input[type="text"] {
+    width:50px;
+    text-align:center;}    
+*/
+.applet {
+    font-family:Arial,Verdana;
+    font-size:12px;
+    width:360px;
+    background-color:#f2f2f2;
+    padding:16px;
+    border:solid 1px #e5e5e5;
+    text-align:center;
+    margin:0 0 16px 0;}
+
+.applet span:last-child {
+    color:green;
+}
+
+h1 {
+    font-size:14px;
+    margin:0 0 8px 0;
 }
