@@ -1,3 +1,37 @@
+$('#print-task-list').click(function() {
+    // Goal: Put the contents in a new tab that can be printed
+    var contents = $('#task_list').prop('outerHTML');
+
+    // For the new tab, we need to basically construct all the pieces we need for any HTML page starting with a start <html> tag.
+    var new_tab_contents  = '<html>';
+    
+    // (Note the += symbol is used to add content onto an existing variable, so basically we're just adding onto our new_tab_contents variable one line at a time)
+    new_tab_contents += '<head>';
+    new_tab_contents += '<link rel="stylesheet" href="css/main.css" type="text/css">'; // Don't forget your CSS so the card looks good in the new tab!
+    new_tab_contents += '<link rel="stylesheet" href="css/features.css" type="text/css">';
+    new_tab_contents += '</head>';
+    new_tab_contents += '<body>'; 
+    new_tab_contents += contents; 
+    new_tab_contents += '</body></html>';
+    
+    // Ok, our content is ready to go, we just need to work on opening the tab
+    
+    // Here's how we tell JavaScript to create a new tab (tabs are controlled by the "window" object).
+    var new_tab =  window.open();
+
+    // Now within that tab, we want to open access to the document so we can make changes
+    new_tab.document.open();
+    
+    // Here's the change we'll make: we'll write our card (i.e., new_tab_contents) to the document of the tab
+    new_tab.document.write(new_tab_contents);
+    
+    // Then close the tab. This isn't actually closing the tab, it's just closing JS's ability to talk to it.
+    // It's kind of like when you're talking to a walkie-talkie and you say "over and out" to communicate you're done talking
+    new_tab.document.close();
+            
+});
+
+
 $('#get-new-form').click(function() {
     console.log("in get-new-form");
     // Call the server to get the view fragment'

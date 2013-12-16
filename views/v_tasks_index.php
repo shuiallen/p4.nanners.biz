@@ -7,9 +7,20 @@
 <div class="newtask" id='newtask-div'>
 
 </div>
+<hr>
+
+<div>
+	<h1> All tasks view </h1>
+		<p> Rearrange the task list by dragging the entries</p>
+		<form id='print-task-list-form'>
+			<!-- This form is not going to the server so not including hidden token here -->
+			<input type='Submit' id='print-task-list' value='Print Task list'>
+		</form>
+</div>
 
 <!-- List all tasks -->
-<div id=task_list>
+<div id='task_list'>
+	<h1>Open tasks</h1>
     <ul id="sortable">
 
     <?php foreach($tasks as $task): ?>

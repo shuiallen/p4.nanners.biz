@@ -7,6 +7,32 @@ This goal of this website is to keep track of things in lists in several differe
 
 I can envision an application that does a lot of things to help me be organized, but I know my web application development skills are limited, as well as the time I have to implement this to submit it for class.  Here's a description of my thinking - but my implementation is going to be limited to just a few features, while include the required components like using Javascript, Ajax, the class framework, security checking.
 
+
+My application:
+
+You must create a user, sign in to use the site
+
+You can view your profile  (All code from P2)
+
+Working functionality
+- create new tasks
+- view a list of all open tasks
+- the tasks in the list are sortable by dragging them  (using JQuery sortable)
+- print the list of tasks - open a new tab  (it's not pretty)
+- Find a task by id and update/edit the task description and status (open or closed)
+- Record time spent on an individual task
+
+- update the status to done
+
+
+Issues:
+- I am dynamically inserting a form to create a new task
+- In this case, I am having trouble with 2 things
+	1 - Using the ajaxForm to call the server.  It works if I use the $.ajax() call and explicitly pass data
+	2 - If I try to add a token to the form, I get an error referencing the token value when calling $.ajax or ajaxForm
+
+What I really want to do:
+
 I am pretty organized, I'm a list-maker, but it's still pretty hard to keep track of everything I need to do.
 I have used many methods of keeping track of things - Excel spreadsheets, a sticky note app, Evernote, paper lists on scraps of paper, paper lists in notebooks or pads.  All frustrating in one way or another.  At the moment, I like Evernote, but I still find things get buried there.
 
@@ -18,24 +44,6 @@ So, I have two kinds of lists in this application - a quick list (essentially ju
 
 The quick list has items that are like reminders for today.  The quick list is printable.  It is also savable as a whole unit.  When you reload it, you can pick items to make into real tasks to save.
 
-
-My application:
-
-You must create a user, sign in to use the site
-
-You can view your profile  (All code from P2)
-
-Working functionality
-- create new tasks
-- view a list of all open tasks
-- the tasks in the list are sortable by dragging them
-- Record time spent on an individual task
-- edit a task
-- update the status to done
-
-Not Working!
-- Requires ability to update a task
-	
 
 
 
@@ -55,6 +63,7 @@ Not Working!
 
 References:
 
+JQuery Interactions: Sortable
 Stopwatch code to capture time worked is based on :  http://jsfiddle.net/ezmilhouse/V2S9d/
 
 

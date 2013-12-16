@@ -30,7 +30,7 @@ class tasks_controller extends base_controller {
         $tasks = DB::instance(DB_NAME)->select_rows($q);
 
         foreach($tasks as $key => $task) {
-            // XSS prevention 
+            // XSS prevention on output
             $task['task_description'] = ProjectUtils::clean($task['task_description']);
             $tasks[$key]['view'] = View::instance('v_tasks_row');
             $tasks[$key]['view']->data = $task;
@@ -50,7 +50,7 @@ class tasks_controller extends base_controller {
         ProjectUtils::check_token($_POST, "update profile");
         # If it doesn't fail, we can remove the token
         unset($_POST['token']);
-         
+
         $view = View::instance('v_tasks_form');
  
         $data = Array();

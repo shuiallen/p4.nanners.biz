@@ -83,6 +83,10 @@ body {
   clear: both;
 }
 
+input[type=Submit] {
+    cursor: pointer;
+}
+
 .formfields {
   border: 5px solid #d0d2d5;
   border-radius: 4px;
