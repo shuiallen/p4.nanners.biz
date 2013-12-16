@@ -39,7 +39,7 @@
 			<!-- Additional options for users who are logged in -->
 			<li><a href='/tasks'>Tasks</a></li>
 			<li><a href='/tasks/edit'>Edit Tasks</a></li>
-			<li><a href='/lists/quicklists'>QuickList</a></li>
+			<li><a href='/quicklists'>QuickList</a></li>
 			<li><a href='/lists'>Build a List</a></li>
 			<li><a href='/projects'>Projects</a></li>
         </div>

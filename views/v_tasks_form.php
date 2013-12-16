@@ -1,5 +1,4 @@
-<form>
-
+<form id='new-task-form'>
 <?php if ($data['task_id'] != 0): ?>
 	<label for='task<?=$data['task_id']?>'>Task Id</label><br>
     <input type='text' name='task_id' id='task<?=$data['task_id']?>' value=<?=$data['task_id']?> readonly>

@@ -2,6 +2,8 @@
 
 <div class=vertical-container>
     <form class=formfields method='POST' action='/users/p_update'>
+        <input type='hidden' name='token' value='<?=$token?>'>
+        
         First Name<br>
         <input type='text' name='first_name' value=<?=$user->first_name ?>>
         <br><br>

@@ -1,6 +1,8 @@
 <h2> Signup </h2>
 <div class=vertical-container>
     <form class=formfields method='POST' action='/users/p_signup'>
+        <input type='hidden' name='token' value='<?=$token?>'>
+        
         <?php if(isset($error) && $error == "blanks"): ?>
             <div class='error'>
                 Missing required fields.

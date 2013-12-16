@@ -1,9 +1,10 @@
 <!-- Click this button to get the new task form -->
-<form>
+<form id='new-task-button-form'>
+    <input type='hidden' name='token' value='<?=$token?>'>
     <input type='Submit' id='get-new-form' value='New task'>
 </form>
 <!-- This element will appear when adding a new task -->
-<div class="newtask">
+<div class="newtask" id='newtask-div'>
 
 </div>
 

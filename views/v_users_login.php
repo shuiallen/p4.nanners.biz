@@ -1,7 +1,8 @@
 <h2> Log in </h2>
 <div class=vertical-container>
     <form class=formfields method='POST' action='/users/p_login'>
-
+        <input type='hidden' name='token' value='<?=$token?>'>
+        
         Email<br>
         <input type='text' name='email' autofocus required>
 
