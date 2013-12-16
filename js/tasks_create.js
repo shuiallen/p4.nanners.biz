@@ -1,5 +1,5 @@
 $('#print-task-list').click(function() {
-    // Goal: Put the contents in a new tab that can be printed
+    // Goal: Put the task list in a new tab that can be printed
     var contents = $('#task_list').prop('outerHTML');
 
     // For the new tab, we need to basically construct all the pieces we need for any HTML page starting with a start <html> tag.
@@ -14,7 +14,7 @@ $('#print-task-list').click(function() {
     new_tab_contents += contents; 
     new_tab_contents += '</body></html>';
     
-    // Ok, our content is ready to go, we just need to work on opening the tab
+    // Ok, our list is ready to go, we just need to work on opening the tab
     
     // Here's how we tell JavaScript to create a new tab (tabs are controlled by the "window" object).
     var new_tab =  window.open();
@@ -33,7 +33,6 @@ $('#print-task-list').click(function() {
 
 
 $('#get-new-form').click(function() {
-    console.log("in get-new-form");
     // Call the server to get the view fragment'
     var options = {
         type: 'POST',

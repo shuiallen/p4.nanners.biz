@@ -63,6 +63,8 @@ class tasks_controller extends base_controller {
     }
 
     public function p_create() {
+        # should check for CSRF token here, but having issues, see note in js/tasks_create.js
+
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
@@ -79,7 +81,8 @@ class tasks_controller extends base_controller {
  
         $data = Array();
         $data['task_id'] = $task_id;
-        $data['task_description'] = $_POST['task_description'];
+        // XSS prevention on output
+        $data['task_description'] = ProjectUtils::clean($_POST['task_description']);
 
         $view = View::instance('v_tasks_row');
         $view->data = $data;
@@ -104,6 +107,9 @@ class tasks_controller extends base_controller {
                         '/js/time_entry.js'
                         );
         $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
+        # Generate a new CSRF session token, and pass it to the View
+        $this->template->content->token = NoCSRF::generate('token');
 
         # Render template
         echo $this->template;
@@ -141,11 +147,9 @@ class tasks_controller extends base_controller {
         # Update the user's data
          $count = DB::instance(DB_NAME)->update(
              'tasks', $_POST, "WHERE task_id = ".$_POST['task_id']);
-
-        if ($count == 1)
-            echo $_POST['task_description'];
-        else
-            echo 'failed '.$count;
-
+        $data = Array();
+        $data['task_id'] = $_POST['task_id'];
+        $data['count'] = $count;
+        echo json_encode($data);
     }
 }
