@@ -39,6 +39,7 @@
 			<!-- Additional options for users who are logged in -->
 			<li><a href='/tasks'>Tasks</a></li>
 			<li><a href='/tasks/edit'>Work with Tasks</a></li>
+			<li><a href='/reports'>Reports</a></li>
 			<li><a href='/quicklists'>QuickList</a></li>
 			<li><a href='/lists'>Build a List</a></li>
 			<li><a href='/projects'>Projects</a></li>
