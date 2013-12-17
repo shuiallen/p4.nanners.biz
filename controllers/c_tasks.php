@@ -91,8 +91,7 @@ class tasks_controller extends base_controller {
     }
 
     # This is the page that allows you to edit individual tasks
-    # I was trying to edit tasks from the Task List page but that wasn't working
-    # I think the way I am inserting the rows and declaring the event handlers is not correct
+    # I would like to edit tasks inline from the Task List page but was having trouble with the event handlers
     # So for now, you have to get one task at a time in order to change it after creating it
     public function edit() {
         # Setup view
@@ -116,6 +115,10 @@ class tasks_controller extends base_controller {
     }
 
     public function p_findById() {
+        ProjectUtils::check_token($_POST, "update task");
+        # If it doesn't fail, we can remove the token
+        unset($_POST['token']);
+        
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
@@ -136,6 +139,7 @@ class tasks_controller extends base_controller {
     }
 
     public function p_update() {
+
         # Prevent SQL injection attacks by sanitizing the data the user entered in the form
         $_POST = DB::instance(DB_NAME)->sanitize($_POST); 
 

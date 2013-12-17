@@ -6,14 +6,33 @@ $('#create-time-entry').click(function() {
         success: function(response) { 
             console.log("in success case");
             console.log(response);
+            var data = $.parseJSON(response);
             // How to determine success of create?  ajax call was successful
             // what to display now?
-        }
+            var status;
+            if (data['time_entry_id'] == -1) {
+                status = ' does not exist';
+                $('#time_entry_id').html("failed");       
+            } else {
+                $('#time_entry_id').html(data['time_entry_id']);
+                status = ' succeeded';
+            }
+            console.log(status);
+            $('#te_task_id').html(data['task_id']);
+            $('#te_status').html(status);
+
+            $('#new-time-entry-status').show();
+        },
+        resetForm: true
     }
     $('#new-time-entry').ajaxForm(options);
     // display it now
 });
 
+$('find-te-for-task').click(function() {
+
+
+});
 
 (function($){
     $.extend({
@@ -45,11 +64,6 @@ $('#create-time-entry').click(function() {
                 default :
                     // get current timestamp (for calculations)
                     $.APP.t1 = $.APP.d1.getTime(); 
-
-                    // if countdown add ms based on seconds in textfield
-                    if ($.APP.dir === 'cd') {
-                        $.APP.t1 += parseInt($('#cd_seconds').val())*1000;
-                    }    
                     break;   
                 }                                   
                 
@@ -79,7 +93,7 @@ $('#create-time-entry').click(function() {
             },
             
             stopTimer : function() {
-                console.log('stop timer');
+
                 // change button value
                 $('#' + $.APP.dir + '_start').val('Restart');                    
                 
@@ -89,6 +103,7 @@ $('#create-time-entry').click(function() {
             },
             
             resetTimer : function() {
+                console.log('reset timer');
                 // reset display
                 $('#' + $.APP.dir + '_ms,#' + $.APP.dir + '_s,#' + $.APP.dir + '_m,#' + $.APP.dir + '_h').html('00');                 
                 
@@ -128,21 +143,8 @@ $('#create-time-entry').click(function() {
                     d2 = new Date();
                     t2 = d2.getTime();   
                     
-                    // calculate time difference between
-                    // initial and current timestamp
-                    if ($.APP.dir === 'sw') {
-                        td = t2 - $.APP.t1;
-                    // reversed if countdown
-                    } else {
-                        td = $.APP.t1 - t2;
-                        if (td <= 0) {
-                            // if time difference is 0 end countdown
-                            $.APP.endTimer(function(){
-                                $.APP.resetTimer();
-                                $('#' + $.APP.dir + '_status').html('Ended & Reset');
-                            });
-                        }    
-                    }    
+                    // calculate time difference between initial and current timestamp
+                    td = t2 - $.APP.t1;
                     
                     // calculate milliseconds
                     ms = td%1000;
@@ -182,10 +184,10 @@ $('#create-time-entry').click(function() {
                     // update global total counter
                     $.APP.hours = h;
                     $.APP.mins = m;
-                    console.log('looping');
+                    //console.log('looping');
                     
                     // loop
-                    $.APP.t = setTimeout($.APP.loopTimer,1000);
+                    $.APP.t = setTimeout($.APP.loopTimer,10);
                 } else {
                     // kill loop
                     clearTimeout($.APP.t);
@@ -201,14 +203,31 @@ $('#create-time-entry').click(function() {
                     type: 'POST',
                     url: '/time_entry/p_create',
                     success: function(response) { 
-                        // todo: what to display after time is recorded ?  clear form? reset stop watch
-                        $.APP.resetTimer();
+                        var data = $.parseJSON(response);
+                        var status;
+                        if (data['time_entry_id'] == 0) {
+                            status = ' missing';
+                            $('#tte_id').html("failed");
+                        } else if (data['time_entry_id'] == -1) {
+                            status = ' does not exist';
+                            $('#tte_id').html("failed");       
+                        } else {
+                            $('#tte_id').html(data['time_entry_id']);
+                            status = ' succeeded';
+                            $.APP.resetTimer();
+                        }
+                        console.log(status);
+                        $('#tte_task_id').html(data['task_id']);
+                        $('#tte_status').html(status);
+
+                        $('#timer-entry-status').show();
                     },
                     data: {
                         task_id : $('#timer_task_id').val(),
                         hours   : $.APP.hours,
                         mins    : $.APP.mins,
-                        date    : new Date()
+                        date    : new Date(),
+                        token   : $('#timer-token').val()
                     }
                 });
             }
@@ -236,6 +255,5 @@ $('#create-time-entry').click(function() {
     $('#record').on('click', function() {
         $.APP.recordTime();
     });                       
-            
 })(jQuery);
         

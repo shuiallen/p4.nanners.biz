@@ -27,13 +27,15 @@ $('#edit-div').on("click", '#update-task', function() {
         type: 'POST',
         url: '/tasks/p_update',
         success: function(response) { 
+            console.log('in update success!');
+            console.log(response);
             var data = $.parseJSON(response);
-
             var status = data['task_id'];
             if (data['count']==1)
                 status += ' succeeded';
             else
                 status += ' failed';
+            console.log(status);
             $('#status_task_id').html(status);
             $('#status_task_id').show();
             $('#edittask-status').show();
