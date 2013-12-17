@@ -12,34 +12,6 @@
 	Update Task <span id='status_task_id'></span><br>
 </div>
 <hr>
-<p>Find time entries for a task</p>
-<form id='find-te-by-task-form'>
-    <input type='hidden' name='token' value='<?=$token?>'>
-	<label for='te_for_task_id'>Task Id</label><br>
-	<input type="text" name='task_id' id='te_for_task_id' required>
-    <input type='Submit' id='find-te-for-task' value='Find'>
-</form>
-<div class='time-entry-section' id='te-for-task'>
-    <table id="te-table" class="display" >
-	    <thead>
-			<tr>
-				<th>Date</th>
-				<th>Time Spent</th>
-				<th>User</th>
-			</tr>
-	    </thead>
-	    <tbody id='te-table-body'>
-
-	    </tbody>
-    </table>
-
-
-
-</div>
-<div class='status' id='edittask-status'>
-	Update Task <span id='status_task_id'></span><br>
-</div>
-<hr>
 <p> Create a time entry</p>
 <form id='new-time-entry'>
     <input type='hidden' name='token' value='<?=$token?>'>
@@ -90,6 +62,11 @@
 
 <hr>
 <!-- This does repeat the view fragment from v_tasks_index and should be refactored to eliminate this -->
+<!-- It reuses the create-task event handler but that handler depends on #sortable element which doesn't
+     exist on this page.  I included this operation on this page so you don't have to switch pages to create
+     a task, while working on other tasks.  It works but it doesn't report whether the task was successfully
+     created.
+     -->
 <p> Create a new task</p>
 <form id='new-task-button-form'>
     <input type='hidden' name='token' value='<?=$token?>'>

@@ -7,6 +7,7 @@ $('#print-task-list').click(function() {
     
     // (Note the += symbol is used to add content onto an existing variable, so basically we're just adding onto our new_tab_contents variable one line at a time)
     new_tab_contents += '<head>';
+    // TODO : figure out what the CSS should be for this output
     new_tab_contents += '<link rel="stylesheet" href="css/main.css" type="text/css">'; // Don't forget your CSS so the card looks good in the new tab!
     new_tab_contents += '<link rel="stylesheet" href="css/features.css" type="text/css">';
     new_tab_contents += '</head>';

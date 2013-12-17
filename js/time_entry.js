@@ -29,11 +29,7 @@ $('#create-time-entry').click(function() {
     // display it now
 });
 
-$('find-te-for-task').click(function() {
-
-
-});
-
+// Stop watch timer and record time to a task
 (function($){
     $.extend({
         APP : {
