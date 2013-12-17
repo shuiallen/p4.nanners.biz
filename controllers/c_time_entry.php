@@ -41,7 +41,10 @@ class time_entry_controller extends base_controller {
         $data['created']  = Time::now();
         $data['modified'] = Time::now();
     
-        $data['date_of_work'] = strtotime($_POST['date']);
+        if (isset($_POST['date']))
+            $data['date_of_work'] = strtotime($_POST['date']);
+        else
+            $data['date_of_work'] = Time::now();
 
         # Insert this task into the tasks table
         $time_entry_id = DB::instance(DB_NAME)->insert('time_entry', $data);

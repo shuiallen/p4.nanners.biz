@@ -2,7 +2,7 @@
 <form id='edit-task-form'>
     <input type='hidden' name='token' value='<?=$token?>'>
 	<label for='task_id'>Task Id</label><br>
-	<input type="text" name='task_id' id='task_id' required>
+	<input type="text" name='task_id' id='task_id' required align="right">
     <input type='Submit' id='find-task' value='Find'>
 </form>
 <div class='edittask' id='edit-div'>
@@ -16,7 +16,7 @@
 <form id='new-time-entry'>
     <input type='hidden' name='token' value='<?=$token?>'>
 	<label for='time_task_id'>Task Id</label><br>
-	<input type="text" name='task_id' id='time_task_id' required>
+	<input type="text" name='task_id' id='time_task_id' required align="right">
 	<label for='date'>Date worked</label>
 	<input type="date" name="date" required>
 	<label for='hours_worked'>Hours</label>
@@ -35,7 +35,7 @@
 	    <h1>Task Timer</h1>
 	    <p>Use stopwatch to capture time worked and assign to task</p>
 		<label for='timer_task_id'>Task Id</label><br>
-		<input type="text" name='task_id' id='timer_task_id' required>
+		<input type="text" name='task_id' id='timer_task_id' required align="right">
 		<br/>
 		<br/>
 	    <span id="sw_h">00</span>:

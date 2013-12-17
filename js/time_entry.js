@@ -222,7 +222,6 @@ $('#create-time-entry').click(function() {
                         task_id : $('#timer_task_id').val(),
                         hours   : $.APP.hours,
                         mins    : $.APP.mins,
-                        date    : new Date(),
                         token   : $('#timer-token').val()
                     }
                 });
