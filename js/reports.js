@@ -1,9 +1,6 @@
 $(function() {
 
 	$(document).ready( function () {
-		$('#te-table').dataTable( {
-					"aaSorting": [[ 1, "asc" ]]
-				});
 	});
 });
 
@@ -16,27 +13,26 @@ $('#find-te-for-task').click(function() {
         type: 'POST',
         url: '/reports/p_time_entries_by_id',
         success: function(response) {
- 			console.log(response);
+            var data = $.parseJSON(response);
+            console.log(data);
+            $('#te-table').dataTable().fnDestroy();
+			$('#te-table').dataTable( {
+					"aaSorting": [[ 1, "asc" ]],
+					"aoColumns": [
+				        { "mData": "date_of_work" },
+				        { "mData": "time_spent" },
+				        { "mData": "user" },
+				        { "mData": "task_description" },
+				        { "mData": "task_id" },
+				    ],
+					"aaData": data
+				});
+        	$('#te-table').show();
         },
         resetForm: true  
     }
     //$('#find-te-by-task-form').ajaxForm(options);
         $('form').ajaxForm(options);
-
-	// // Clear table previously displayed
-	// $('#te-table').dataTable().fnClearTable();
-
-	// // Iterate over the bib assignment divs to insert rows in the table body
-	// $('#pairs').children('div').each(function () {
-	// 	if ($(this).children().length > 0) {
-	// 		var thisRacer = $(this).find(".racer").html();
-	// 		var thisBib   = $(this).find(".bib").html();
-	// 		$('#roster-table').dataTable().fnAddData( [
-	// 			thisBib,
-	// 			thisRacer]);
-	// 	}
-	// });
-
 });
 
 

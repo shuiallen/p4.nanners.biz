@@ -10,6 +10,8 @@ class reports_controller extends base_controller {
         $this->template->content = View::instance('v_reports');
         $this->template->title   = "Reports";
 
+			$client_files_head = Array("js/DataTables/media/css/demo_table.css");
+	    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
         // this needs to be included but i don't know where/how yet
 	// <style type="text/css" title="currentStyle">
 	//   @import "js/DataTables/media/css/demo_table.css";
@@ -57,17 +59,36 @@ class reports_controller extends base_controller {
 	            time_entry.time_spent,
 	            time_entry.task_id,
 	            tasks.task_description,
-	            time_entry.user_id
+				users.first_name,
+				users.last_name
 	        FROM time_entry
+            INNER JOIN users
+				ON time_entry.user_id = users.user_id
 	        INNER JOIN tasks 
 	            ON time_entry.task_id = tasks.task_id
 	        WHERE time_entry.task_id ='.$_POST['task_id'];
 
 	    $entries = DB::instance(DB_NAME)->select_rows($q);
 
-	    $data = Array();
-        $data['entries'] = $entries;
-		echo json_encode($data);
+        foreach($entries as $key => $entry) {
+            // XSS prevention on output
+            $entry['task_description'] = ProjectUtils::clean($entry['task_description']);
+            // Get nice date format
+			$entry['date_of_work'] = Time::display($entry['date_of_work'], "M d Y");
+			// Get nice user name
+			$entry['user'] = $entry['first_name']." ".$entry['last_name'];
+			$total_mins = $entry['time_spent'];
+			$mins = $total_mins % 60;
+			$hrs = ($total_mins - $mins) / 60;
+
+			$entry['time_spent'] = $hrs.":".$mins;
+			unset($entry['first_name']);
+			unset($entry['last_name']);
+			// Convert time spent to hours:minutes
+
+			$entries[$key] = $entry;
+        }
+		echo json_encode($entries);
 	}
 
 }  # eoc

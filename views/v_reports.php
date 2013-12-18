@@ -14,6 +14,8 @@
 				<th>Date</th>
 				<th>Time Spent</th>
 				<th>User</th>
+				<th>Description</th>
+				<th>Task Id</th>
 			</tr>
 	    </thead>
 	    <tbody id='te-table-body'>
