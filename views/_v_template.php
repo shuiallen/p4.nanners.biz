@@ -35,8 +35,6 @@
         <div class=nav>
  			<li><a href='/'>Home</a></li>
 
-		<!-- <?php if(is_object($user) && $user): ?> -->
-			<!-- Additional options for users who are logged in -->
 			<li><a href='/tasks'>Tasks</a></li>
 			<li><a href='/tasks/edit'>Work with Tasks</a></li>
 			<li><a href='/reports'>Reports</a></li>
@@ -45,7 +43,7 @@
 			<li><a href='/projects'>Projects</a></li>
         </div>
 
-		<!-- <?php endif; ?> -->
+
 
         <div class=content>
 			<?php if(isset($content)) echo $content; ?>
