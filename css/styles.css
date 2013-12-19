@@ -83,7 +83,7 @@ body {
   clear: both;
 }
 
-input[type=Submit] {
+input[type=Submit], input[type=button] {
     cursor: pointer;
 }
 
@@ -132,7 +132,7 @@ input[type=Submit] {
     height: 180px;
     display:none;
 }
-.status {
+.status, .search, .results {
     display:none;
 }
 

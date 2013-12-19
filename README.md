@@ -31,7 +31,6 @@ Working functionality
   -- record time on a given task id
   -- use a stopwatch timer to accumulate time while you work
 - Find time entries for a task
-  - export to csv or print to a invoice template ?
 
 References:
 
@@ -55,11 +54,11 @@ I have used many methods of keeping track of things - Excel spreadsheets, a stic
 
 In particular, I end up making a paper list for the things I need to do TODAY, in the order I need to do them in.  I often need to annotate the list with a circled number because the items are written in the wrong order and obviously I don't want to rewrite the list.  Also on the side, I might add a list of small things (which have some importance/priority) to try to do if I have 20 mins between this and that thing.  Most times, at the end of the day, I have things that didn't get finished - sometimes they're important, so they need to get pushed to tomorrow's list, and sometimes, they can just get put off to the next day that I have time to think about that thing.  If I lose the piece of paper by the end of the day, I have to recreate it.  It is a nuisance to create a note or Excel entry for everything and then have to move it or remove it from some other list.  This is the frustrating part about making lists - it seems like you spend more time keeping track of the list than getting anything done!  I'd like to have the daily list recorded (in case I lose it), be able to extract out of it something that wasn't finished, but in general, I can throw it away at the end of the day, or keep it as a template for another day.
 
-Then, I need real task items to track bigger things to do, and those tasks are the things that need to be done for a project (eg. paint the bathroom), they might need to be in an ordered list.  For some tasks, I'd like to keep track over time how much time I'm spending doing it (eg raking leaves, did i spend more time this year than last year?). And, I may be doing some informal consulting work.  It would be useful to have a way to record time spent.  It would also be nice to track tasks by projects.  Lots of ways to filter tasks to make lists.
+Then, I need real task items to track bigger things to do, and those tasks are the things that need to be organized for a project (eg. paint the bathroom), they might need to be in an ordered list.  For some tasks, I'd like to keep track over time how much time I'm spending doing it (eg raking leaves, did i spend more time this year than last year?). And, I may be doing some informal consulting work.  It would be useful to have a way to record time spent, that could be used eventually to create an invoice.  It would also be nice to track tasks by projects.  Lots of ways to filter tasks to make lists.
 
 So, I'd like  two kinds of lists in this application - a quick list (essentially just a text list) and a real List (which is a list of individual tasks).  Quick lists, real lists and tasks can be organized by Project (optional).
 
-The quick list has items that are like reminders for today.  The quick list is printable.  It is also savable as a whole unit.  When you reload it, you can pick items to make into real tasks to save.
+The quick list has items that are like reminders for today.  The quick list is viewable and printable.  It is also savable as a whole unit.  When you reload it, you can pick items to make into real tasks to save.
 
 
 

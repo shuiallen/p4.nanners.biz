@@ -123,7 +123,7 @@ class tasks_controller extends base_controller {
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
         # Get the task description of this task by task id
-        $q = "SELECT tasks.task_description, tasks.task_id
+        $q = "SELECT tasks.task_description, tasks.task_id, tasks.status
                 FROM `tasks`
                WHERE `task_id` = ".$_POST['task_id'];
  

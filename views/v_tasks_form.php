@@ -6,18 +6,17 @@
 <?php endif; ?>
 
 <?php if ($data['task_id'] != 0): ?>
-    <textarea name='task_description' id='edit_task_description' rows="2" cols="80" wrap=hard autofocus required>
+    <textarea name='task_description' id='edit_task_description' rows="2" cols="80" wrap=hard autofocus required><?=$data['task_description']?></textarea>
 <?php else: ?>
-    <textarea name='task_description' id='new_task_description' rows="2" cols="80" wrap=hard autofocus required>
+    <textarea name='task_description' id='new_task_description' rows="2" cols="80" wrap=hard autofocus required><?=$data['task_description']?></textarea>
 <?php endif; ?>
-        <?=$data['task_description']?>
-    </textarea>
+
 
 <?php if ($data['task_id'] != 0): ?>
 	<br>
 	<select name="status">
-		<option value="open">Open</option>
-		<option value="close">Close</option>
+		<option value="open" <?php if ($data['status'] == '0'): ?>selected<?php endif; ?>>Open</option>
+		<option value="close" <?php if ($data['status'] == '1'): ?>selected<?php endif; ?>>Closed</option>
 	</select>
 	<br>
     <input type='Submit' id='update-task' value='Update'>
