@@ -47,7 +47,7 @@ class tasks_controller extends base_controller {
     }
 
     public function p_newform() {
-        ProjectUtils::check_token($_POST, "update profile");
+        // ProjectUtils::check_token($_POST, "new task form");
         # If it doesn't fail, we can remove the token
         unset($_POST['token']);
 

@@ -22,28 +22,32 @@
             What Am I Doing Today?
         </div>
         <div class=user-bar>
+        	<ul>
         	<!-- Menu for users who are logged in -->
-			<?php if(is_object($user) && $user): ?>
+<?php if(is_object($user) && $user): ?>
 				<li><a href='/users/logout'>Logout</a></li>
 				<li><a href='/users/profile'>My Profile</a></li>
 			<!-- Menu options for users who are not logged in -->
-			<?php else: ?>
+<?php else: ?>
 				<li><a href='/users/signup'>Register</a></li>
 				<li><a href='/users/login'>Login</a></li>
-		    <?php endif; ?>
+<?php endif; ?>
+			</ul>
         </div>
         <div class=nav>
- 			<li><a href='/'>Home</a></li>
-			<?php if(is_object($user) && $user): ?>
+        	<ul>
+ 				<li><a href='/'>Home</a></li>
+<?php if(is_object($user) && $user): ?>
 
-			<li><a href='/tasks'>Tasks</a></li>
-			<li><a href='/tasks/edit'>Work with Tasks</a></li>
-			<li><a href='/reports'>Reports</a></li>
-			<li><a href='/quicklists'>QuickList</a></li>
-			<li><a href='/lists'>Build a List</a></li>
-			<li><a href='/projects'>Projects</a></li>
+				<li><a href='/tasks'>Tasks</a></li>
+				<li><a href='/tasks/edit'>Work with Tasks</a></li>
+				<li><a href='/reports'>Reports</a></li>
+				<li><a href='/quicklists'>QuickList</a></li>
+				<li><a href='/lists'>Build a List</a></li>
+				<li><a href='/projects'>Projects</a></li>
 
-		    <?php endif; ?>
+<?php endif; ?>
+		    </ul>
         </div>
 
 
