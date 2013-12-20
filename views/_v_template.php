@@ -34,6 +34,7 @@
         </div>
         <div class=nav>
  			<li><a href='/'>Home</a></li>
+			<?php if(is_object($user) && $user): ?>
 
 			<li><a href='/tasks'>Tasks</a></li>
 			<li><a href='/tasks/edit'>Work with Tasks</a></li>
@@ -41,6 +42,8 @@
 			<li><a href='/quicklists'>QuickList</a></li>
 			<li><a href='/lists'>Build a List</a></li>
 			<li><a href='/projects'>Projects</a></li>
+
+		    <?php endif; ?>
         </div>
 
 

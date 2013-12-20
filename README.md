@@ -13,8 +13,6 @@ My implementation:
 
 You must create a user, sign in to use the site
 
-TBD: <supply existing user/pw for grader to use>
-
 You can view your profile  (All code from P2)
 - Fixed my update profile code from P2, which I broke by adding some error checking
 
@@ -31,12 +29,22 @@ Working functionality
   -- record time on a given task id
   -- use a stopwatch timer to accumulate time while you work
 - Find time entries for a task
+- Create a quick list is partially implemented
+  - I've run out of time due to running into issues with the live server
+
+I've been building the tool-lets (little tools?), hoping to tie them together in quick lists and building lists with first-class tasks.
+
 
 References:
 
 JQuery Interactions: Sortable
 Stopwatch code to capture time worked is based on :  http://jsfiddle.net/ezmilhouse/V2S9d/
   -- I removed the countdown code, to have simpler code, although I'm regretting that now. A countdown timer could be useful to allow you to pre-set an amount of time to spend on a task and ring a bell. If you're not done, you can decide to add more time, or move on - don't get stuck in a rat hole!
+Uses the NoCSRF token class, stored in shared/vendors/NoCSRF, per class notes
+
+Issue with live server:
+- My main page loads but something is interfering with loading the users/signup, users/login and other pages
+- The code works on my local, as well as Dan's.
 
 Issues:
 - I am dynamically inserting a form to create a new task
@@ -56,22 +64,19 @@ In particular, I end up making a paper list for the things I need to do TODAY, i
 
 Then, I need real task items to track bigger things to do, and those tasks are the things that need to be organized for a project (eg. paint the bathroom), they might need to be in an ordered list.  For some tasks, I'd like to keep track over time how much time I'm spending doing it (eg raking leaves, did i spend more time this year than last year?). And, I may be doing some informal consulting work.  It would be useful to have a way to record time spent, that could be used eventually to create an invoice.  It would also be nice to track tasks by projects.  Lots of ways to filter tasks to make lists.
 
-So, I'd like  two kinds of lists in this application - a quick list (essentially just a text list) and a real List (which is a list of individual tasks).  Quick lists, real lists and tasks can be organized by Project (optional).
+So, I'd like  two kinds of lists in this application - a quick list (essentially just a text list) and a real List (which is a list of individual tasks  (first class objects, not a string in a quick list)).  Quick lists, real lists and tasks can be organized by Project (optional).
 
 The quick list has items that are like reminders for today.  The quick list is viewable and printable.  It is also savable as a whole unit.  When you reload it, you can pick items to make into real tasks to save.
 
-
-
-
-- create a quick list
+Quick list is partially implemented
 	- this is a list of items that you might not create individual tasks for - they are kind of temporary
 	- or you can use this to create lists such as grocery or packing lists
 	- you can add items to a quick list, put the items into a document and save it, or print it;
 	- it is loadable
 
+Not done
 - build a todo today list by moving tasks from a big list to the today tab
 	- put the items into a document and save it, it is printable
-
 - assign tasks to a project, find tasks assigned to a project
 - add a tag to tasks, to search for them later
 
@@ -84,9 +89,6 @@ Tasks
 Time Entry
 Lists
 Projects
-
-
-
 
 Relationships
 

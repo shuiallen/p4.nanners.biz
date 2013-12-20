@@ -31,25 +31,28 @@
 <hr>
 <div id=task_list>
 	<form id='view-quicklist'>
+		<label for='list-title'>Quick List Title</label>
+		<input type='text' name='title' id='quicklist-title'>
+		<!-- I would like to put these buttons on the right side -->
 		<input type='button' id='print-list' value='Print list'>
 		<input type='button' id='save-list' value='Save list'>
 		<input type='button' id='reset-list' value='Reset'>
-		<br/>
-		<label for='list-title'>Quick List Title</label>
-		<input type='text' name='title' id='quicklist-title'>
+
 	</form>
 	<div>QuickList Id: <span id='quicklist-header'></span> 	<span id='save-status'></span>
 	</div>
 	</br>
 	<div id='quicklist-items'>
-	    <ul id="sortable">
-	    </ul>
 
 		<form id='add-item'>
 			<label for='list_item'>Quick List Item</label>
 			<textarea name='list_item' id='list_item' rows="2" cols="80" wrap=hard autofocus required></textarea>
 			<input type='button' id='insert-item' value='Enter'>
 		</form>
+
+	    <ul id="sortable">
+	    </ul>
+
 	</div>
 	
 

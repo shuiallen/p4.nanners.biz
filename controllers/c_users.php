@@ -191,7 +191,7 @@ class users_controller extends base_controller {
             setcookie("token", $token, strtotime('+1 year'), '/');
 
             # Send them to the main page
-            Router::redirect("/lists/mylists");
+            Router::redirect("/");
 
         }
 

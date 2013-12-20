@@ -33,10 +33,13 @@ $('#find-qlist').click(function() {
 
 $('#insert-item').click(function() {
     var str = '<li class="ui-state-default">'+$('#list_item').val()+'</li>';
-    $('#sortable').prepend(str);
+    $('#sortable').append(str);
+    // An alternative is to insert the new item at the beginning of the list
+    // But depends on the user, so this could be a configurable setting?
+    // $('#sortable').prepend(str);
     $('#add-item').resetForm();
-    // todo: how do I get the cursor back into this form?
-    $('#add-item').focus();
+    // todo: how do I get the cursor back into this form? this line doesn't have any affect
+    $('#list-item').focus();
 });
 
 $('#reset-list').click(function() {
@@ -46,26 +49,20 @@ $('#reset-list').click(function() {
 });
 
 $('#save-list').click(function() {
-	console.log ('got here');
-	// take the contents of the ul
-	var items = new Array();
-	var i = 0;
-	$('#sortable').children('li').each(function () {
-		console.log($(this).html());
-		items[i++] = $(this).html();
-	});
-	console.log(items);
-	console.log(JSON.stringify(items));
-	// and the quicklist title
+	console.log("in save quick list");
+	if ($('#quicklist-title').val().length == 0) {
+		$('#save-status').html("Missing Title");
+		return;
+	};
+
 	var this_list_id = $('#quicklist-header').html();
 	console.log(this_list_id);
 	if (this_list_id == "") {
-		console.log("id is null");
+		// This is a new list
 	    $.ajax({
 	        type: 'POST',
 	        url: '/quicklists/p_create',
 	        success: function(response) { 
-	            console.log("quicklist create success");
 	            var data = $.parseJSON(response);
 				$('#quicklist-header').html(data['quicklist_id']);
 				$('#save-status').html("saved");
@@ -84,12 +81,12 @@ $('#save-list').click(function() {
 	        type: 'POST',
 	        url: '/quicklists/p_update',
 	        success: function(response) { 
-	            console.log("quicklist update success");
 	            var data = $.parseJSON(response);
 				$('#save-status').html("updated " + data['modified']);
 	        },
 	        data: {
 	            content        : $('#sortable').html(),
+	            title          : $('#quicklist-title').val(),
 	            quicklist_id   : this_list_id
 	        }     
 	    });
