@@ -1,7 +1,7 @@
 <h1>Build a List</h1>
 <p>This feature is not implemented</p>
 <p>The intent of this page is to find tasks in the Search Tab and move them to the Today tab. </p>
-<p>The today tab might be seeded with a quick list, and tasks could be inserted into the quick list, defining an order of things to do today. </p>
+<p>The today tab might be seeded with a quick list, and individual tasks can be added to the Today tab, the list in the Today can be reordered, defining an order of things to do today. </p>
 <!-- <div>
     <form>
         <label for='projectName'>Open  tab for project</label><br>

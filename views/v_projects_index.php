@@ -1,5 +1,5 @@
 <h1>Project index</h1>
-
+<p>The features on this page are not implemented</p>
 <div>
 	<p> List of projects you belong to </p>
 	<div>

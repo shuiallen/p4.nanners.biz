@@ -5,7 +5,7 @@ CSCI-E15 Project 4
 
 This goal of this website is to help you make a list of things to do today.  It also explores different ways of keeping track of things in lists.
 
-I can envision an application that does a lot of things to help me be organized, but I know my web application development skills are limited, as well as the time I have to implement this to submit it for class.  My approach to organizing is described in the 'What I really want the application to do' section below - but my implementation is going to be limited to just a few features, while include the required components - Javascript, Ajax, the class framework, security checking.
+I can envision an application that does a lot of things to help me be organized, but I know my web application development skills are limited, as well as the time I have to implement this to submit it for class.  My approach to organizing is described in the 'What I really want the application to do' section below - but my implementation is going to be limited to just a few features, which use the required components - Javascript, Ajax, the class framework, security checking.
 
 My layouts are primitive, I'm not very experienced in this area.  And they aren't very jazzy or visual (no icons or images), buttons are just rectangular.
 
@@ -23,7 +23,7 @@ Working functionality
 - print the list of tasks in the order they appear on the page
   - opens a new tab  (it's not pretty)
   - reorder set of tasks is not saved (future functionality in lists)
-- Find a task by id and update/edit the task description and status (open or closed)
+- Find a task by id and update/edit the task description and set status (open or closed)
   - Report update was executed successfully
 - Record time spent on an individual task in two ways
   -- record time on a given task id
@@ -32,13 +32,13 @@ Working functionality
 - Create a quick list is partially implemented
   - I've run out of time due to running into issues with the live server, and perhaps, trying to solve a bigger problem than I expected.
 
-I've been building little functional tools, hoping to tie them together in quick lists and building lists with first-class tasks.
+I've been building little functional tools, the goal was to tie them together in quick lists and building lists with first-class tasks.
 
 References:
 
 JQuery Interactions: Sortable
 Stopwatch code to capture time worked is based on :  http://jsfiddle.net/ezmilhouse/V2S9d/
-  -- I removed the countdown code, to have simpler code, although I'm regretting that now. A countdown timer could be useful to allow you to pre-set an amount of time to spend on a task and ring a bell. If you're not done, you can decide to add more time, or move on - don't get stuck in a rat hole!
+  -- I removed the countdown code, to have simpler code, although I'm regretting that now. A countdown timer could be useful to allow you to pre-set an amount of time to spend on a task and ring a bell. Use it to limit the amount of time spent on a task. If you're not done, you can decide to add more time, or move on - don't get stuck in a rat hole!
 Uses the NoCSRF token class, stored in shared/vendors/NoCSRF, per class notes
 
 Issue with live server:
@@ -48,7 +48,7 @@ Issue with live server:
 Missing Functionality
 - No delete operations for any objects
   - I would like to learn how to add a standard delete icon to a button that would perform a delete on the object
-- print works only for printing tasks, would like to print time entry report and quicklist
+- Print implemented for tasks page only, would like to print time entry report and quicklist
   - need to create a util to print an element from #print-task-list click handler in tasks_create
 
 What I really want the application to do:
@@ -83,11 +83,12 @@ Not done
 - add a tag to tasks, to search for them later
 
 Issues:
-- I am dynamically inserting a form to create a new task
-- In this case, I am having trouble with 2 things
-	1 - Using the ajaxForm to call the server doesn't work.  It works if I use the $.ajax() call and explicitly pass data
+1 - I am dynamically inserting a form to create a new task
+	- In this case, I am having trouble with 2 things
+	a - Using the ajaxForm to call the server doesn't work.  It works if I use the $.ajax() call and explicitly pass data
 	    I need to try more experiments with this - I find behavior of invoking $selector.ajaxForm() not consistent, based on whether there is more than one form on the page, whether you are using a class or id selector
-	2 - If I try to add a token to the form, I get an error referencing the token value when calling $.ajax or ajaxForm
+	b - If I try to add a token to the form, I get an error referencing the token value when calling $.ajax or ajaxForm
+2 - New task form does not have CSRF token check working.  I need to get the value of the token from the current page and add it to _POSTS
 
 
 Data organization

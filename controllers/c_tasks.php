@@ -47,9 +47,10 @@ class tasks_controller extends base_controller {
     }
 
     public function p_newform() {
+        // Need to have token added to v_tasks_form and token value passed to it here
         // ProjectUtils::check_token($_POST, "new task form");
         # If it doesn't fail, we can remove the token
-        unset($_POST['token']);
+        // unset($_POST['token']);
 
         $view = View::instance('v_tasks_form');
  

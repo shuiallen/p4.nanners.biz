@@ -48,6 +48,11 @@ $('#reset-list').click(function() {
 	$('#save-status').html("");
 });
 
+
+$('#print-list').click(function() {
+	alert("Sorry, this is not implemented yet");
+});
+
 $('#save-list').click(function() {
 	console.log("in save quick list");
 	if ($('#quicklist-title').val().length == 0) {
